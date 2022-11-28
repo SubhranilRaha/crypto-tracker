@@ -3,8 +3,6 @@ import { createContext } from 'react'
 
 const Crypto= createContext()
 
-
-
 const CryptoContext = ({children}) => {
 
     const [currency,setCurrency]=useState("INR");
