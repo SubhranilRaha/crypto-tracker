@@ -42,7 +42,7 @@ const Caraousel = () => {
     
 
       return(
-      <Link className='flex flex-col items-center gap-2 cursor-pointer mx-5' to={`/coin/${coin.id}`}>
+      <Link className='flex flex-col items-center gap-2 cursor-pointer mx-5 ' to={`/coin/${coin.id}`}>
         <img className='h-20' src={coin.image} alt={coin.name} />
         <span>
         {coin.symbol}
@@ -57,7 +57,7 @@ const Caraousel = () => {
     })
 
   return (
-    <div className='flex align-center mt-5 w-[380px]'>
+    <div className='flex align-center mt-5 w-[380px] lg:w-[1000px]'>
       <AliceCarousel
       mouseTracking
       infinite
