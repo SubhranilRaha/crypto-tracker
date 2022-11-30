@@ -4,25 +4,26 @@ import { CoinList } from "../Config/api";
 import { CryptoState } from "../CryptoContext";
 import { Link } from 'react-router-dom'
 
+export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  
 const CoinsTable = () => {
     const [coins, setCoins] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
     
     const { currency, symbol } = CryptoState();
 
-
+    
     const fetchCoins = async () => {
-        setLoading(true);
         const { data } = await axios.get(CoinList(currency));
         console.log(data);
-    
         setCoins(data);
-        setLoading(false);
       };
     
       useEffect(() => {
         fetchCoins();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [currency]);
 
       const filteredCoins = coins.filter(coin=>
@@ -32,6 +33,7 @@ const CoinsTable = () => {
         
   return (
     <div className='relative top-10 lg:top-20 '>
+       <div className="hidden">{currency}</div>
        <h1 className="w-screen flex justify-center font-bold text-3xl text-center ">Cryptocurrency Prices by Market Cap</h1>
         <form className="flex items-center justify-center mt-3">   
         <input type="text" id="" className="p-2 pl-5 rounded-lg w-full mx-5 max-w-[700px]" placeholder="Search Coin" required onChange={(e)=>setSearch(e.target.value)}/>
@@ -43,16 +45,38 @@ const CoinsTable = () => {
         {filteredCoins.map(coin => {
         return (
         <Link className='cursor-pointer' to={`/coin/${coin.id}`}>
-          <Coin
-          key={coin.id}
-          name={coin.name}
-          image={coin.image}
-          symbol={coin.symbol}
-          volume={coin.total_volume}
-          price={coin.current_price}
-          priceChange={coin.price_change_percentage_24h}
-          marketcap={coin.market_cap}
-           />
+          <div className="hover:scale-105 transition duration-150 ease-in-out">
+         <div className="m-10 lg:py-16 rounded-3xl border border-yellow-600 flex justify-around h-[200px] items-center lg:h-[100px]">
+             <div className="w-24 h-full flex flex-col items-center justify-center ml-2 lg:flex-row gap-5 lg:w-20 lg:mx-14">
+                 <img src={coin.image} alt="crypto" />
+                 <p className="font-extrabold">{coin.symbol.toUpperCase()}</p>
+             </div>
+            <div className="lg:flex lg:flex-row lg:gap-10 lg:w-[700px]">
+            <div className="flex lg:justify-center lg:items-center">
+            <h1 className="font-extrabold mb-2 lg:mb-0 lg:w-[200px]">{coin.name}</h1>
+            </div>
+             <div className="lg:text-center lg:w-[200px]">
+             <p className="font-bold text-sm antialiased italic">Price:</p>
+             <p className="">{symbol}{numberWithCommas(coin.current_price.toFixed(2))}</p>
+             </div>
+             <div className="lg:text-center lg:w-[200px]">
+             <p className="font-bold text-sm antialiased italic ">Mkt Cap: </p>
+             <p>{symbol}{" "}{numberWithCommas(
+                            coin.market_cap.toString().slice(0, -6)
+                          )}
+                          {" "}M</p> 
+             </div>
+             <div className="lg:text-center lg:w-[200px]">
+             <p className="font-bold text-sm antialiased italic ">24hr change:</p>
+              { coin.price_change_percentage_24h<0?(
+              <p className="text-red-500">{coin.price_change_percentage_24h.toFixed(2)}%</p> 
+              ):
+              (<p className="text-green-500">+{coin.price_change_percentage_24h.toFixed(2)}%</p>)
+              }
+             </div>
+            </div>
+         </div>
+        </div>
         </Link>
         );
       })}
@@ -62,29 +86,3 @@ const CoinsTable = () => {
 
 export default CoinsTable
 
-const Coin = ({image,name,symbol,price,volume,priceChange,marketcap}) => {
-    return (
-        <div className="border border-yellow-600 m-10 rounded-3xl h-52">
-         <div className="flex justify-around h-[200px] items-center">
-             <div className="w-24 h-full flex flex-col items-center justify-center ml-2">
-                 <img src={image} alt="crypto" />
-                 <p className="font-extrabold">{symbol.toUpperCase()}</p>
-             </div>
-             
-            <div className="">
-             <h1 className="font-extrabold mb-2">{name}</h1>
-             <p className="font-bold text-sm antialiased italic">Price:</p>
-             <p className="">₹{price}</p>
-             <p className="font-bold text-sm antialiased italic mt-1">Mkt Cap: </p>
-             <p>{marketcap.toLocaleString()}</p> 
-             <p className="font-bold text-sm antialiased italic mt-1">24hr change:</p>
-              { priceChange<0?(
-              <p className="text-red-500">{priceChange.toFixed(2)}%</p> 
-              ):
-              (<p className="text-green-500">+{priceChange.toFixed(2)}%</p>)
-              }
-            </div>
-         </div>
-        </div>
-    )
-}
