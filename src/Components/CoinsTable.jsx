@@ -83,7 +83,7 @@ const CoinsTable = () => {
       <div class="btn-group">
   <button class="btn">pg1</button>
   <button class="btn">Pg2</button>
-  <button class="btn">pg-3</button>
+  <button class="btn">pg3</button>
 </div>
     </div>
   )
