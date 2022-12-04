@@ -11,7 +11,7 @@ export function numberWithCommas(x) {
 const CoinsTable = () => {
     const [coins, setCoins] = useState([]);
     const [search, setSearch] = useState("");
-    
+    const [page, setPage] = useState(1);
     const { currency, symbol } = CryptoState();
 
     
@@ -42,7 +42,7 @@ const CoinsTable = () => {
         </button>
         </form>
 
-        {filteredCoins.map(coin => {
+        {filteredCoins.slice((page-1)*10,(page-1)*10+10).map(coin => {
         return (
         <Link className='cursor-pointer' to={`/coin/${coin.id}`}>
           <div className="hover:scale-105 transition duration-150 ease-in-out">
@@ -80,11 +80,16 @@ const CoinsTable = () => {
         </Link>
         );
       })}
-      <div class="btn-group">
-  <button class="btn">pg1</button>
-  <button class="btn">Pg2</button>
-  <button class="btn">pg3</button>
-</div>
+    <div class="btn-group flex justify-center items-center my-10 gap-1 ">
+    <button class=" text-yellow-500 p-3 rounded-xl active:scale-95 w-16">{"<<"}</button>
+    <button class="p-3 rounded-full active:scale-95 w-10">{1}</button>
+    <button class="p-3 rounded-full active:scale-95 w-10">{2}</button>
+    <button class="p-3 rounded-full active:scale-95 w-10">{3}</button>
+    <button class="p-3 rounded-full active:scale-95 w-10">{"..."}</button>
+    <button class="p-3 rounded-full active:scale-95 w-10">{(filteredCoins.length/10).toFixed(0)}</button>
+    <button class=" text-yellow-500 p-3 rounded-xl active:scale-95 w-16">{">>"}</button>
+    </div>
+    <div className="h-1"></div>
     </div>
   )
 }
