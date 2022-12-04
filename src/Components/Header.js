@@ -38,7 +38,7 @@ function Header() {
         </select>
 
 
-        <div className="flex-none mr-5">
+        <div className="flex-none mr-1">
 
             <select className="select select-bordered w-full max-w-xs" value={currency} onChange={(e)=>setCurrency(e.target.value)}>
               <option>INR</option>

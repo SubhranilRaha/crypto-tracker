@@ -43,13 +43,13 @@ const Caraousel = () => {
 
       return(
       <Link className='flex flex-col items-center gap-2 cursor-pointer mx-5 ' to={`/coin/${coin.id}`}>
-        <img className='h-20' src={coin.image} alt={coin.name} />
-        <span>
+        <img className='h-20 ' src={coin.image} alt={coin.name} />
+        <span className='text-white'>
         {coin.symbol}
           {profit?<span className='text-green-500'>&nbsp;{profit && "+"}{coin.market_cap_change_percentage_24h.toFixed(2)}%</span>
           :<span className='text-red-500'>&nbsp;{profit && "+"}{coin.market_cap_change_percentage_24h.toFixed(2)}%</span>}
         </span>
-        <span className='text-xs'>
+        <span className='text-xs text-white'>
         {symbol} {numberWithCommas(coin.current_price.toFixed(2))}
         </span>
       </Link>

@@ -3,6 +3,10 @@ import axios from "axios";
 import { CoinList } from "../Config/api";
 import { CryptoState } from "../CryptoContext";
 import { Link } from 'react-router-dom'
+import Pagination from '@mui/material/Pagination';
+
+
+
 
 export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -80,16 +84,19 @@ const CoinsTable = () => {
         </Link>
         );
       })}
-    <div class="btn-group flex justify-center items-center my-10 gap-1 ">
-    <button class=" text-yellow-500 p-3 rounded-xl active:scale-95 w-16">{"<<"}</button>
-    <button class="p-3 rounded-full active:scale-95 w-10">{1}</button>
-    <button class="p-3 rounded-full active:scale-95 w-10">{2}</button>
-    <button class="p-3 rounded-full active:scale-95 w-10">{3}</button>
-    <button class="p-3 rounded-full active:scale-95 w-10">{"..."}</button>
-    <button class="p-3 rounded-full active:scale-95 w-10">{(filteredCoins.length/10).toFixed(0)}</button>
-    <button class=" text-yellow-500 p-3 rounded-xl active:scale-95 w-16">{">>"}</button>
-    </div>
-    <div className="h-1"></div>
+     <Pagination className="flex justify-center items-center mb-5 "
+          count={(filteredCoins?.length / 10).toFixed(0)}
+          
+          onChange={(_, value) => {
+            setPage(value);
+            window.scroll(0, 500);
+          }}
+          shape="rounded"
+          variant="text"
+          color="warning"
+         
+        />
+        <div className="h-5"></div>
     </div>
   )
 }
