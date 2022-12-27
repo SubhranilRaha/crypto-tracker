@@ -8,6 +8,7 @@ import Pagination from '@mui/material/Pagination';
 
 
 
+
 export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -34,17 +35,20 @@ const CoinsTable = () => {
         coin.name.toLowerCase().includes(search.toLowerCase())||
         coin.symbol.toLowerCase().includes(search.toLowerCase())
         )
-        
+            
   return (
-    <div className='relative top-10 lg:top-20 '>
-       <div className="hidden">{currency}</div>
-       <h1 className="w-screen flex justify-center font-bold text-3xl top-20 text-center ">Cryptocurrency Prices by Market Cap</h1>
-        <form className="flex items-center justify-center mt-3">   
-        <input type="text" id="" className="p-2 pl-5 rounded-lg w-full mx-5 max-w-[700px]" placeholder="Search Coin" required onChange={(e)=>setSearch(e.target.value)}/>
-        <button type="submit" className="mr-6">
-        <svg className="w-7 h-7" fill="none" stroke="#f59e0a" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-        </button>
+    <div className='relative top-10 lg:top-16 '>
+
+        <form class="flex items-center justify-center flex-col gap-5 lg:flex-row lg:gap-0 lg:justify-between mx-12">   
+        <h1 className="flex justify-center font-bold text-3xl top-20 text-center mt-2 ">Cryptocurrency Prices  <br className="lg:hidden" />  by Market Cap</h1>
+            <div class="relative w-[300px]">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input type="text"  class=" text-sm rounded-lg w-full pl-10 p-2.5" placeholder="Search Coins" required onChange={(e)=>setSearch(e.target.value)}/>
+            </div>
         </form>
+
 
         {filteredCoins.slice((page-1)*10,(page-1)*10+10).map(coin => {
         return (
@@ -84,7 +88,9 @@ const CoinsTable = () => {
         </Link>
         );
       })}
-     <Pagination className="flex justify-center items-center mb-5 "
+      <div className="flex justify-center items-center">
+      <div className="bg-amber-500 py-2 rounded-xl mb-5 w-[342px] ">
+      <Pagination className="flex justify-center items-center  "
           count={(filteredCoins?.length / 10).toFixed(0)}
           
           onChange={(_, value) => {
@@ -93,10 +99,12 @@ const CoinsTable = () => {
           }}
           shape="rounded"
           variant="text"
-          color="warning"
+         
          
         />
-        <div className="h-5"></div>
+      </div>
+      </div>
+      
     </div>
   )
 }
