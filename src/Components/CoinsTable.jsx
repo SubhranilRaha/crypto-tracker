@@ -38,7 +38,7 @@ const CoinsTable = () => {
   return (
     <div className='relative top-10 lg:top-20 '>
        <div className="hidden">{currency}</div>
-       <h1 className="w-screen flex justify-center font-bold text-3xl text-center ">Cryptocurrency Prices by Market Cap</h1>
+       <h1 className="w-screen flex justify-center font-bold text-3xl top-20 text-center ">Cryptocurrency Prices by Market Cap</h1>
         <form className="flex items-center justify-center mt-3">   
         <input type="text" id="" className="p-2 pl-5 rounded-lg w-full mx-5 max-w-[700px]" placeholder="Search Coin" required onChange={(e)=>setSearch(e.target.value)}/>
         <button type="submit" className="mr-6">
