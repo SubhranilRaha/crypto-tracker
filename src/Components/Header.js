@@ -17,7 +17,7 @@ function Header() {
       <div className="navbar bg-base-100 my-2">
         <div className="flex-1">
 
-        <Link to='/' className="btn btn-ghost normal-case text-xl lg:text-3xl"><span className='text-amber-500'>Crypto</span>Hunter<span className='text-amber-500'>.</span></Link>
+        <Link to='/' className="btn btn-ghost normal-case text-xl lg:text-3xl"><span className='text-amber-500'>Crypto</span>Tracker</Link>
         
 
         </div>
