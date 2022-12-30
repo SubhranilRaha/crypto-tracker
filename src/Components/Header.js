@@ -12,10 +12,6 @@ function Header() {
     themeChange(false)
   }, [])
 
-
-  
-
-
   return (
     <div>
       <div className="navbar bg-base-100 my-2">

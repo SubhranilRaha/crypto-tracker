@@ -5,10 +5,6 @@ import { CryptoState } from "../CryptoContext";
 import { Link } from 'react-router-dom'
 import Pagination from '@mui/material/Pagination';
 
-
-
-
-
 export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -52,7 +48,7 @@ const CoinsTable = () => {
 
         {filteredCoins.slice((page-1)*10,(page-1)*10+10).map(coin => {
         return (
-        <Link className='cursor-pointer' to={`/coin/${coin.id}`}>
+     
           <div className="hover:scale-105 transition duration-150 ease-in-out">
          <div className="m-10 lg:py-16 rounded-3xl border border-yellow-600 flex justify-around h-[200px] items-center lg:h-[100px]">
              <div className="w-24 h-full flex flex-col items-center justify-center ml-2 lg:flex-row gap-5 lg:w-20 lg:mx-14">
@@ -85,7 +81,7 @@ const CoinsTable = () => {
             </div>
          </div>
         </div>
-        </Link>
+     
         );
       })}
       <div className="flex justify-center items-center">
@@ -99,15 +95,11 @@ const CoinsTable = () => {
           }}
           shape="rounded"
           variant="text"
-         
-         
         />
       </div>
       </div>
-      
     </div>
   )
 }
 
 export default CoinsTable
-
